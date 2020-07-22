@@ -4,8 +4,20 @@ const router = express.Router()
 const Inventory = require('../models/inventory')
 
 // All Inventory Route
-router.get('/', (req, res)=>{
-    res.render('inventory/index')
+router.get('/', async (req, res)=>{
+    let searchOptions = {}
+    if(req.query.name != null && req.query.name !== ''){
+        searchOptions.name = new RegExp(req.query.name, 'i')
+    }
+    try{
+        const inventory = await Inventory.find(searchOptions)
+        res.render('inventory/index', {
+            inventory: inventory,
+            searchOptions: req.query
+        })
+    } catch {
+        res.redirect('/')
+    }
 })
 
 // New Inventory route

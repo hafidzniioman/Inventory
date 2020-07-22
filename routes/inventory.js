@@ -14,8 +14,19 @@ router.get('/new', (req, res)=>{
 })
 
 // Create Author Route
-router.post('/', (req, res)=> {
-    res.send(req.body.name)
+router.post('/', async (req, res)=> {
+    const inventory = new Inventory({
+        name: req.body.name
+    })
+    try{
+        const newInventory = await inventory.save()
+        res.redirect(`inventory`)
+    } catch{
+        res.render('inventory/new', {
+        inventory: inventory,
+        errorMessage: 'Error creating new inventory'
+        })
+    }
 })
 
 module.exports = router

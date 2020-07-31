@@ -1,0 +1,9 @@
+<h2><%= inventory.name %></h2>
+<a href="/inventory/<%= inventory.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm', {url: `/inventory/${inventory.id}`}) %>
+<% if (booksByInventory.length > 0) { %>
+    <h2>Books By Inventory</h2>
+    <% booksByInventory.forEach(books => { %>
+        <img height="150" width="100" src="<%= books.coverImagePath %>">
+    <% }) %>
+<% } %>

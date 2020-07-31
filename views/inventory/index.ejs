@@ -7,4 +7,8 @@
 <br>
 <% inventory.forEach(inventory => { %>
     <div><%= inventory.name %> </div>
+    <a href="/inventory/<%= inventory.id %>">View</a>
+    <a href="/inventory/<%= inventory.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm',
+              { url: `/inventory/${inventory.id}` }) %>
 <% }) %>

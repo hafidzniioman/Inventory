@@ -9,7 +9,7 @@ const inventorySchema = new mongoose.Schema({
 })
 
 inventorySchema.pre('remove', function(next){
-    Book.find({inventory: this.id}, (err, book) => {
+    Book.find({inventory: this.id}, (err, books) => {
         if (err) {
             next(err)
         } else if (books.length > 0) {

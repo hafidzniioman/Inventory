@@ -1,5 +1,4 @@
 const express = require('express')
-const { route } = require('.')
 const router = express.Router()
 const Inventory = require('../models/inventory')
 const Book = require('../models/book')
@@ -50,11 +49,9 @@ router.get('/:id', async (req, res) => {
             inventory: inventory,
             booksByInventory: books
         })
-    } catch (err) {
-        console.log(err)
+    } catch {
         res.redirect('/')
     }
-    res.send('Show inventory' + req.params.id)
 })
 
 router.get('/:id/edit', async (req, res) => {
